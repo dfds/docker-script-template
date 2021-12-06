@@ -13,9 +13,9 @@ resources:
 
 variables:
   dockerRegistry: "Docker Cloud - dfdsazuredevops" # Service Connection
-  dockerOrganization: "dfdsdk"
-  repository: "hello" # You need to specify the name for your image repository. For instance: hello
-  imageName: "$(dockerOrganization)/$(repository)"
+  # You must set your full image name here in the format dockerOrganization/dockerRepository
+  # For example: dfdsdk/hello
+  imageName: "dfdsdk/hello"
 
 stages:
   - stage: Build

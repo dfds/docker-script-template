@@ -9,8 +9,10 @@ on:
     types: [published]
   workflow_dispatch:
 
+# You must set your full image name here in the format dockerOrganization/dockerRepository
+# For example: dfdsdk/hello
 env:
-  IMAGE_NAME: dfdsdk/hello # TODO: You must set your full repository name here in the format org/repo, for instance: dfdsdk/hello
+  IMAGE_NAME: dfdsdk/hello
 
 jobs:
   test:
