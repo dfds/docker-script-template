@@ -1,0 +1,57 @@
+# Build semantic versioning tag from Github releases
+trigger:
+  tags:
+    include:
+      - "*"
+  branches:
+    exclude:
+      - main
+      - master
+
+resources:
+  - repo: self
+
+variables:
+  dockerRegistry: "Docker Cloud - dfdsazuredevops" # Service Connection
+  dockerOrganization: "dfdsdk"
+  repository: "hello" # You need to specify the name for your image repository. For instance: hello
+  imageName: "$(dockerOrganization)/$(repository)"
+
+stages:
+  - stage: Build
+    displayName: Build image
+    jobs:
+      - job: Build
+        displayName: Build
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+          - task: gitversion/setup@0
+            displayName: Install GitVersion
+            inputs:
+              versionSpec: "5.x"
+          - task: gitversion/execute@0
+            displayName: Determine Version
+          - task: Docker@2
+            inputs:
+              containerRegistry: $(dockerRegistry)
+              command: "login"
+              addPipelineData: false
+          - task: Docker@2
+            displayName: Build an image
+            inputs:
+              repository: $(imageName)
+              command: build
+              Dockerfile: Dockerfile
+              tags: |
+                latest
+                $(GitVersion.SemVer)
+          - task: Docker@2
+            displayName: Push image
+            inputs:
+              containerRegistry: $(dockerRegistry)
+              repository: $(imageName)
+              command: push
+              tags: |
+                latest
+                $(GitVersion.SemVer)
