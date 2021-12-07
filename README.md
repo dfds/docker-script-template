@@ -5,6 +5,7 @@
   - [Choose a Docker Hub repository name](#choose-a-docker-hub-repository-name)
     - [Update pipelines](#update-pipelines)
   - [Consider updating .gitignore](#consider-updating-gitignore)
+  - [Start hacking](#start-hacking)
 
 A template for creating Docker image as wrapper around scrips.
 
@@ -13,6 +14,7 @@ After creating a new GitHib repository based on this template, you need to:
 1. Choose a CI/CD pipeline engine.
 2. Choose a Docker Hub repository name.
 3. Consider updating .gitignore
+4. Start hacking
 
 ## Choose a CI/CD pipeline engine
 
@@ -82,3 +84,11 @@ You should now add and commit the updated pipeline files to Git.
 Since Python is the preferred language for our SRE scripts, the .gitignore file supplied
 by the template project is written for Python. If your project is written for other languages,
 you ought to replace the supplied .gitignore file with your own.
+
+## Start hacking
+
+- Put your script source files inside the src directory.
+- Update the Dockerfile to fit your needs, for example using another base image.
+- Update the src/entrypoint.sh script to call your script.
+- Optionally add a CMD intruction with opinionated input variables to your script.
+- Replace the contents of this README.md file with instructions for how to run your Docker image.
