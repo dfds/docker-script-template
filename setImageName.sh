@@ -36,6 +36,9 @@ USE_SAVE_FILE=${SAVE_FILE:-'N'}
 if [[ $USE_SAVE_FILE == 'Y' || $USE_SAVE_FILE == 'y' ]]; then
     echo "Updating IMAGE_NAME environment variable in GitHub Actions."
     sed -i "s/.*IMAGE_NAME:.*/  IMAGE_NAME: ${USE_DOCKER_ORG}\/${USE_DOCKER_REPO}/g" .github/workflows/docker.yaml
+    echo
+    echo "Updating imageName pipeline variable in Azure Devops."
+    sed -i "s/.*imageName:.*/  imageName: \"${USE_DOCKER_ORG}\/${USE_DOCKER_REPO}\"/g" azure-pipelines.yml
 else
     echo "You chose NOT to save ${USE_DOCKER_ORG}/${USE_DOCKER_REPO}. Update cancelled. "
 fi
