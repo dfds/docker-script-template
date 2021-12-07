@@ -18,7 +18,7 @@ These steps include:
 5. Preferably also give the repository a **Description**.
 6. Select *Visibility*. Either *Public* or *Private*.
 7. Under *Build Settings*, click on the *Connected* logo for GitHub's octocat.
-8. Select GitHub *organzation* and GitHub *repository* to find the location of your source code.
+8. Select GitHub *organization* and GitHub *repository* to find the location of your source code.
 9. Choose the *Branch* from which you want to trigger builds. Usually *main* or *master*.
 10. Click on the *Create* button.
 11. Now go into the *Build* tab, and click on the *Configure Automated Builds* button.

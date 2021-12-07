@@ -26,7 +26,7 @@ Choose only one CI/CD engine. You can use either one of these:
 
 ## Choose a Docker Hub repository name
 
-The Docker Hub repostory name is used to push and pull images. The name must be unique.
+The Docker Hub repository name is used to push and pull images. The name must be unique.
 
 Example:
 
@@ -34,7 +34,7 @@ Example:
 dfdsdk/hello
 ```
 
-There is a script in this template project that can be used to set your Docker Hub repostory name
+There is a script in this template project that can be used to set your Docker Hub repository name
 in the pipelines, so it knows where to push the built images. Run *setImageName.sh* and follow the on-screen instructions.
 
 ### Update pipelines
@@ -90,5 +90,5 @@ you ought to replace the supplied .gitignore file with your own.
 - Put your script source files inside the src directory.
 - Update the Dockerfile to fit your needs, for example using another base image.
 - Update the src/entrypoint.sh script to call your script.
-- Optionally add a CMD intruction with opinionated input variables to your script.
+- Optionally add a CMD instruction with opinionated input variables to your script.
 - Replace the contents of this README.md file with instructions for how to run your Docker image.

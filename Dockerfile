@@ -7,7 +7,7 @@ RUN mkdir sandbox
 
 COPY src sandbox/
 
-WORKDIR sandbox
+WORKDIR /sandbox
 
 RUN chmod +x entrypoint.sh \
     && useradd -d /sandbox -s /bin/bash sandbox \
