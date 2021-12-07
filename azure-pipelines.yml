@@ -1,11 +1,10 @@
-# Build 'latest' tag from main or master branches.
 trigger:
   branches:
     include:
       - main
       - master
   tags:
-    exclude:
+    include:
       - "*"
 
 resources:
@@ -26,24 +25,52 @@ stages:
         pool:
           vmImage: ubuntu-latest
         steps:
+          - task: gitversion/setup@0
+            displayName: Install GitVersion
+            inputs:
+              versionSpec: "5.x"
+            condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
+          - task: gitversion/execute@0
+            displayName: Determine Semantic Version
+            condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
           - task: Docker@2
             inputs:
               containerRegistry: $(dockerRegistry)
               command: "login"
               addPipelineData: false
           - task: Docker@2
-            displayName: Build an image
+            displayName: Build an image and tag with semantic version
+            inputs:
+              repository: $(imageName)
+              command: build
+              Dockerfile: Dockerfile
+              tags: |
+                $(GitVersion.SemVer)
+            condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
+          - task: Docker@2
+            displayName: Push image with semantic version
+            inputs:
+              containerRegistry: $(dockerRegistry)
+              repository: $(imageName)
+              command: push
+              tags: |
+                $(GitVersion.SemVer)
+            condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
+          - task: Docker@2
+            displayName: Build an image and tag latest
             inputs:
               repository: $(imageName)
               command: build
               Dockerfile: Dockerfile
               tags: |
                 latest
+            condition: startsWith(variables['Build.SourceBranch'], 'refs/heads/')
           - task: Docker@2
-            displayName: Push image
+            displayName: Push image with latest tag
             inputs:
               containerRegistry: $(dockerRegistry)
               repository: $(imageName)
               command: push
               tags: |
                 latest
+            condition: startsWith(variables['Build.SourceBranch'], 'refs/heads/')
