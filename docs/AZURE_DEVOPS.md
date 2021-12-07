@@ -22,3 +22,13 @@ These steps include:
 11. Click on the *View* button next to the warning.
 12. Click on the *Permit* button.
 13. You will be asked to confirm. Click on the second *Permit* button.
+
+## Known issues
+
+With Azure DevOps it is NOT possible to publish this repository's README.md to the Docker Hub repository
+to serve as a readme there too. There are two issues with it:
+
+1. No out-of-box support or Marketplace support for updating readme on  Docker Hub.
+2. API calls is forbidden by the Docker Hub API when using a Personal or team account.
+
+Hence updating the readme on the Docker Hub repository is a manual activity.

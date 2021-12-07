@@ -3,6 +3,7 @@
 - [Pipeline on GitHub Actions](#pipeline-on-github-actions)
   - [Grant access to Action secrets needed by the pipeline](#grant-access-to-action-secrets-needed-by-the-pipeline)
   - [Create Action secrets needed by the pipeline](#create-action-secrets-needed-by-the-pipeline)
+  - [Known issues](#known-issues)
 
 Setting up the pipeline on GitHub Actions is very straightforward, but it also involves a few manual steps.
 
@@ -39,3 +40,12 @@ If you are not a GitHub organization administrator, you can create your own Acti
 
 [^1]: A Docker Hub Access Token can be created under <https://hub.docker.com/settings/security>
 [^2]: The username that own the Docker Hub Access Token.
+
+## Known issues
+
+The GitHub Actions workflow defined in .github/workflows/docker.yaml bas prepared with a step to
+publish this repository's README.md to the Docker Hub repository to serve as a readme there too.
+Currently this do not work when using Docker Hub access tokens with a Personal or team account.
+It will only work with a Pro or Enterprise account.
+
+Hence updating the readme on the Docker Hub repository is a manual activity.
