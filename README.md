@@ -90,5 +90,5 @@ you ought to replace the supplied .gitignore file with your own.
 - Put your script source files inside the src directory.
 - Update the Dockerfile to fit your needs, for example using another base image.
 - Update the src/entrypoint.sh script to call your script.
-- Optionally add a CMD instruction with opinionated input variables to your script.
+- Optionally add a CMD instruction with opinionated arguments to your script.
 - Replace the contents of this README.md file with instructions for how to run your Docker image.
